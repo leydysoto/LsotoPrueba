@@ -1,5 +1,6 @@
 package com.desarrolladora.leydy.Barberia.service;
 
+import com.desarrolladora.leydy.Barberia.dto.DetailsDTO;
 import com.desarrolladora.leydy.Barberia.dto.ProductDTO;
 import com.desarrolladora.leydy.Barberia.entity.Product;
 import com.desarrolladora.leydy.Barberia.model.request.ProductRequest;
@@ -9,21 +10,24 @@ import java.util.List;
 
 public interface ProductService {
 
-    //-------------------------Crear Producto-----------------------------------//
+    //-------------------------Crear Product----------------------------------//
     Product createProduct(ProductRequest productRequest);
 
-    //-------------------------lista de productos----------------------------------//
+    //-------------------------lista de products----------------------------------//
     List<Product> getAllProduct();
 
-    //-------------------------get producto----------------------------------//
+    //-------------------------get product----------------------------------//
     ProductDTO getProductById(Long productId);
 
-    //---------------Editar el discount del producto por promocion, masivamente---------------//
+    //---------------Editar el discount del product por promocion, masivamente---------------//
     List<Product> updateDiscount(PromotionRequest promotionRequest);
 
-    //----------productos segun propiedad discount--------------------------------//
+    //----------products segun propiedad discount--------------------------------//
     List<Product> getFindByDiscount(Integer discount);
 
-    //---------- productos segun propiedad categoria-----------------------------------------//
+    //---------- products segun propiedad categoria-----------------------------------------//
     List<Product>  getFindByCategory(Long categoryId);
+
+    //---------- product details -----------------------------------------//
+    DetailsDTO getProductDetailsById(Long productId);
 }

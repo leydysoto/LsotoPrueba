@@ -1,5 +1,6 @@
 package com.desarrolladora.leydy.Barberia.Controller;
 
+import com.desarrolladora.leydy.Barberia.dto.DetailsDTO;
 import com.desarrolladora.leydy.Barberia.dto.ProductDTO;
 import com.desarrolladora.leydy.Barberia.entity.Product;
 import com.desarrolladora.leydy.Barberia.model.request.ProductRequest;
@@ -87,6 +88,16 @@ public class ProductController {
                         .code(ConstantUtil.OK_CODE)
                         .message(ConstantUtil.OK_MESSAGE)
                         .data(productService.getProductById(productId))
+                        .build()
+        );
+    }
+    @GetMapping("/details/{productId}")
+    public ResponseEntity<ApiResponse<DetailsDTO>> getProductDetailsById(@Valid @PathVariable Long productId){
+        return  ResponseEntity.ok(
+                ApiResponse.<DetailsDTO>builder()
+                        .code(ConstantUtil.OK_CODE)
+                        .message(ConstantUtil.OK_MESSAGE)
+                        .data(productService.getProductDetailsById(productId))
                         .build()
         );
     }

@@ -2,9 +2,11 @@ package com.desarrolladora.leydy.Barberia.service.impl;
 
 import com.desarrolladora.leydy.Barberia.Repository.CategoryRepository;
 import com.desarrolladora.leydy.Barberia.Repository.ProductRepository;
+import com.desarrolladora.leydy.Barberia.dto.DetailsDTO;
 import com.desarrolladora.leydy.Barberia.dto.ProductDTO;
 import com.desarrolladora.leydy.Barberia.entity.Category;
 import com.desarrolladora.leydy.Barberia.entity.Product;
+import com.desarrolladora.leydy.Barberia.mapper.DetailsMapper;
 import com.desarrolladora.leydy.Barberia.mapper.ProductMapper;
 import com.desarrolladora.leydy.Barberia.model.request.ProductRequest;
 import com.desarrolladora.leydy.Barberia.model.request.PromotionRequest;
@@ -22,6 +24,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
+    private final DetailsMapper detailsMapper;
     private  ProductRepository productRepository;
 
     private  CategoryRepository categoryRepository;
@@ -77,5 +80,10 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO getProductById(Long productId){
         Product product =productRepository.findById(productId).orElseThrow(()->new IllegalArgumentException("producto no encontrado"+productId));
         return productMapper.toProductDTO(product);
+    }
+    @Override
+    public  DetailsDTO getProductDetailsById(Long productId){
+        Product product =productRepository.findById(productId).orElseThrow(()->new IllegalArgumentException("producto no encontrado"+productId));
+        return detailsMapper.toDetailsDTO(product);
     }
 }
