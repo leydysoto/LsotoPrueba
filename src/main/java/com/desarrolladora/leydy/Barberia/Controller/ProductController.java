@@ -1,5 +1,6 @@
 package com.desarrolladora.leydy.Barberia.Controller;
 
+import com.desarrolladora.leydy.Barberia.dto.ProductDTO;
 import com.desarrolladora.leydy.Barberia.entity.Product;
 import com.desarrolladora.leydy.Barberia.model.request.ProductRequest;
 import com.desarrolladora.leydy.Barberia.model.request.PromotionRequest;
@@ -30,6 +31,8 @@ public class ProductController {
                         .build()
         );
     }
+    //----------list productos----------------------------------------//
+    @GetMapping()
     public ResponseEntity<ApiResponse<List<Product>>> getAllProduct(){
         return ResponseEntity.ok(
                 ApiResponse.<List<Product>>builder()
@@ -40,7 +43,7 @@ public class ProductController {
         );
     }
 
-    //---------- productos actualizados en descuento por promoción----------------------------------------//
+    //---------- actualizar  descuento de productos por promoción----------------------------------------//
     @PutMapping("/discount")
     public ResponseEntity<ApiResponse<List<Product>>>updateDiscount(@Valid @RequestBody PromotionRequest promotionRequest){
         return ResponseEntity.ok(
@@ -53,7 +56,7 @@ public class ProductController {
     }
 
     //---------- productos segun propiedad discount----------------------------------------//
-    @GetMapping("discount/{discount}")
+    @GetMapping("/discount/{discount}")
     public ResponseEntity<ApiResponse<List<Product>>> getFindByDiscount(@Valid @PathVariable Integer discount){
         return  ResponseEntity.ok(
                 ApiResponse.<List<Product>>builder()
@@ -65,7 +68,7 @@ public class ProductController {
     }
 
     //---------- productos segun propiedad categoria-----------------------------------------//
-    @GetMapping("category/{categoryId}")
+    @GetMapping("/category/{categoryId}")
     public ResponseEntity<ApiResponse<List<Product>>> getFindByCategory(@Valid @PathVariable Long categoryId){
         return  ResponseEntity.ok(
                 ApiResponse.<List<Product>>builder()
@@ -76,5 +79,16 @@ public class ProductController {
         );
     }
 
+    //-------------------get producto-----------------------------------------//
+    @GetMapping("/{productId}")
+    public ResponseEntity<ApiResponse<ProductDTO>> getProductById(@Valid @PathVariable Long productId){
+        return  ResponseEntity.ok(
+                ApiResponse.<ProductDTO>builder()
+                        .code(ConstantUtil.OK_CODE)
+                        .message(ConstantUtil.OK_MESSAGE)
+                        .data(productService.getProductById(productId))
+                        .build()
+        );
+    }
 
 }
